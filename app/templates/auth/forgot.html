@@ -1,0 +1,28 @@
+{% extends 'layouts/auth.html' %}
+{% import 'macros/form_macros.html' as f %}
+
+{% block title %}Enjoy Auto | Reset Password{% endblock %}
+
+{% block style %} 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/forgot.css') }}" />
+{% endblock %}
+
+{% block content %}
+    <div class="ui grid container">
+      <div class="card">
+        {% set flashes = {
+          'error':   get_flashed_messages(category_filter=['form-error']),
+          'warning': get_flashed_messages(category_filter=['form-check-email']),
+          'info':    get_flashed_messages(category_filter=['form-info']),
+          'success': get_flashed_messages(category_filter=['form-success'])
+        } %}
+
+        {{ f.begin_form(form, flashes) }}
+          <h3>FORGOT PASSWORD <a class="float-end" href="/" title="Back to homepage"><i class="fa fa-home pull-right"></i></a></h3>
+          {{ f.render_form_field(form.email) }}
+          {{ f.render_form_field(form.password) }}
+          <input type="submit" value="SUBMIT" class="btn btn-primary btn-lg btn-block mb-2">
+        {{ f.end_form(form) }}
+      </div>
+    </div>
+{% endblock %}

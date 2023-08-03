@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <!-- meta -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <!-- /meta -->
+  <title>{% block title %} {% endblock %}</title>
+
+  <!-- styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+  {% block style %} {% endblock %}
+  <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}" />
+  </head>
+<body>
+
+  <nav class="navbar navbar-expand-lg sticky-top navbar-light p-0">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <span class="logo-enjoy">ENJOY<span class="logo-auto ms-1">AUTO</span></span>
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a {% if data.active == 'home' %} class=" nav-link active" {% else %} class=" nav-link" {% endif %} href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a {% if data.active == 'help' %} class=" nav-link active" {% else %} class=" nav-link" {% endif %} href="/help">Help</a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link btn btn-outline-secondary px-4 mx-4"
+              href="/auth/signin"
+              >Sign In</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  {% block content %}
+  {% endblock %}
+
+  <footer class="footer bg-light mt-6">
+    <div class="container">
+      <div class="row">
+      </div>
+    </div>
+  </footer>
+
+  <button id="to-top" class="to-top-btn">
+    <img src="static/img/up-arrow.png" alt="" />
+  </button>
+
+  <!-- scripts -->
+  <script src="{{ url_for('static', filename='js/libs/modernizr-2.8.2.min.js') }}"></script>
+  <!--[if lt IE 9]><script src="/static/js/libs/respond-1.4.2.min.js"></script><![endif]-->
+  <!-- /scripts -->
+
+  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+  <!-- Google Analytics - Change UA-XXXXX-X to be your site's ID -->
+  <script>
+  window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
+  Modernizr.load({
+    load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+  });
+  </script>
+
+</body>
+</html>

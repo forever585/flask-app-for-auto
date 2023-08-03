@@ -1,0 +1,38 @@
+{% extends 'layouts/auth.html' %}
+{% block title %}Enjoy Auto | Sign In{% endblock %}
+
+{% block style %} 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/signin.css') }}" />
+{% endblock %}
+
+{% import 'macros/form_macros.html' as f %}
+
+{% block content %}
+    <div class="ui grid container">
+        <div class="card">
+          
+            {% set flashes = {
+                'error':   get_flashed_messages(category_filter=['form-error']),
+                'warning': get_flashed_messages(category_filter=['form-check-email']),
+                'info':    get_flashed_messages(category_filter=['form-info']),
+                'success': get_flashed_messages(category_filter=['form-success'])
+            } %}
+
+            {{ f.begin_form(form, flashes, extra_classes='form') }}
+              <h3>SIGN IN <a class="float-end" href="/" title="Back to homepage"><i class="fa fa-home pull-right"></i></a></h3>
+                {{ f.render_form_field(form.email) }}
+                {{ f.render_form_field(form.password) }}
+                <div class="signin-links">
+                  <a href="/auth/signup">Create New One</a>
+                  <a href="/auth/forgot">Forgot Password?</a>
+                </div>
+                <input type="submit" value="SUBMIT" class="btn btn-primary btn-lg btn-block mb-2">
+
+                {{ f.form_message(flashes['error'], header='Something went wrong.', class='error') }}
+                {{ f.form_message(flashes['warning'], header='Check your email.', class='warning') }}
+                {{ f.form_message(flashes['info'], header='Information', class='info') }}
+                {{ f.form_message(flashes['success'], header='Success!', class='success') }}
+            {{ f.end_form(form) }}
+        </div>
+    </div>
+{% endblock %}

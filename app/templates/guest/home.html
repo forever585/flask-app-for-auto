@@ -1,0 +1,49 @@
+{% extends 'layouts/guest.html' %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" />
+{% endblock %}
+{% block title %}Enjoy Auto | Home{% endblock %}
+{% block content %}
+
+<!-- Header -->
+<header class="header position-relative mt-6 overflow-hidden">
+  <img
+    src="static/img/decoration-star.svg"
+    alt=""
+    class="decoration-star position-absolute"
+  />
+  <img
+    src="static/img/decoration-star.svg"
+    alt=""
+    class="decoration-star-2 position-absolute"
+  />
+  <div class="container position-relative z-3">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="mt-1">
+          <h1 class="xl-text">
+            PLEASE <span class="text-primary">ENJOY</span> YOUR AUTO BID!
+          </h1>
+          <p class="lead mb-4">
+            Automate your LinkedIn job applications with ease using this Python and Selenium-based bot. Tested successfully on
+over 15,000 job applications, this bot simplifies the Easy Apply process. Please note that the bot is provided without
+warranty, and usage is at your own risk.
+          </p>
+          <a href="/help" class="btn btn-primary btn-lg m-2">
+            More Details
+          </a>
+          <a href="/auth/signin" class="btn btn-outline-secondary btn-lg m-2">
+            Sign In
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="image-container">
+          <img src="static/img/hero.png" alt="" class="img-fluid" />
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+{% endblock %}
