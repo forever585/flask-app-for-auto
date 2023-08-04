@@ -55,30 +55,31 @@ def signup():
             first_name=form.first_name.data,
             last_name=form.last_name.data,
             email=form.email.data,
-            password=form.password.data)
+            password=form.password.data,
+            confirmed=True)
         db.session.add(user)
         db.session.commit()
-        token = user.generate_confirmation_token()
-        confirm_link = url_for('auth.confirm', token=token, _external=True)
-        get_queue().enqueue(
-            send_email,
-            recipient=user.email,
-            subject='Confirm Your Account',
-            template='auth/email/confirm',
-            user=user,
-            confirm_link=confirm_link)
-        flash('A confirmation link has been sent to {}.'.format(user.email),
-              'warning')
-        return redirect(url_for('client.index'))
+        # token = user.generate_confirmation_token()
+        # confirm_link = url_for('auth.confirm', token=token, _external=True)
+        # get_queue().enqueue(
+        #     send_email,
+        #     recipient=user.email,
+        #     subject='Confirm Your Account',
+        #     template='auth/email/confirm',
+        #     user=user,
+        #     confirm_link=confirm_link)
+        # flash('A confirmation link has been sent to {}.'.format(user.email),
+        #       'warning')
+        return redirect(url_for('auth.signin'))
     return render_template('auth/signup.html', form=form)
 
 
-@auth.route('/logout')
+@auth.route('/signout')
 @login_required
 def logout():
     logout_user()
     flash('You have been logged out.', 'info')
-    return redirect(url_for('client.index'))
+    return redirect(url_for('guest.index'))
 
 
 @auth.route('/manage', methods=['GET', 'POST'])

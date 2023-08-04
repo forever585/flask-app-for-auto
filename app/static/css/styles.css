@@ -1,3 +1,13 @@
+::-webkit-scrollbar{
+  width: 6px!important;
+  background: #acb7e1!important;
+}
+
+::-webkit-scrollbar-thumb{
+  background: #4577af!important;
+  border-radius: 10px!important;
+}
+
 .xl-text {
   font-size: 75px;
 }

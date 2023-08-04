@@ -68,7 +68,7 @@ def invite_user():
         db.session.commit()
         token = user.generate_confirmation_token()
         invite_link = url_for(
-            'account.join_from_invite',
+            'auth.join_from_invite',
             user_id=user.id,
             token=token,
             _external=True)
@@ -76,7 +76,7 @@ def invite_user():
             send_email,
             recipient=user.email,
             subject='You Are Invited To Join',
-            template='account/email/invite',
+            template='auth/email/invite',
             user=user,
             invite_link=invite_link,
         )

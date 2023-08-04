@@ -1,0 +1,103 @@
+<!-- meta tags and other links -->
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/select2.min.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}" />
+        {% block style %} {% endblock %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}" />
+        <link rel="icon" href="images/favicon.png" />
+        <title>Enjoy Auto</title>
+    </head>
+<body>
+    <!-- page-wrapper start -->
+    <div class="page-wrapper default-version">
+        
+        <div class="sidebar">
+            <div class="sidebar__inner">
+               <div class="sidebar__logo">
+                   <a class="navbar-brand" href="#">
+                       <span class="logo-enjoy">ENJOY<span class="logo-auto ms-1">AUTO</span></span>
+                   </a>
+               </div>
+        
+               <div class="sidebar__menu-wrapper mt-3" id="sidebar__menuWrapper">
+                   <ul class="sidebar__menu">
+                       <li class="sidebar-menu-item">
+                           <a href="/client/dashboard" {% if data.active == 'dashboard' %} class=" nav-link active" {% else %} class=" nav-link" {% endif %}>
+                               <i class="fa fa-laptop font-size-24"></i>
+                               <span class="menu-title font-size-24">Dashboard</span>
+                           </a>
+                       </li>
+        
+                       <li class="sidebar-menu-item">
+                           <a href="/client/apply" {% if data.active == 'apply' %} class=" nav-link active" {% else %} class=" nav-link" {% endif %}>
+                               <i class="fa fa-reply font-size-24"></i>
+                               <span class="menu-title font-size-24">Apply</span>
+                           </a>
+                       </li>
+                   </ul>
+               </div>
+           </div>
+        </div>
+
+
+        <nav class="navbar-wrapper navbar-light">
+            <div class="navbar__left">
+                <h3 class="m-0">{{data.title}}</h3>
+            </div>
+            <div class="navbar__right">
+                <ul class="navbar__action-list">
+                    <li class="dropdown">
+                        <button type="button" class="" data-bs-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                            <span class="navbar-user">
+                                <span class="navbar-user__thumb"><img src="{{ url_for('static', filename='img/avatar.jpg') }}" alt="image"></span>
+                                <span class="navbar-user__info">
+                                    <span class="navbar-user__name">User 1</span>
+                                </span>
+                                <span class="icon"><i class="fa fa-angle-down"></i></span>
+                            </span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu--sm p-0 border-0 box--shadow1 dropdown-menu-right">
+                            <a href="/client/profile" class="dropdown-menu__item d-flex align-items-center px-3 py-2">
+                                <i class="fa fa-user"></i>
+                                <span class="dropdown-menu__caption ms-2">Profile</span>
+                            </a>
+        
+                            <a href="/auth/signout" class="dropdown-menu__item d-flex align-items-center px-3 py-2">
+                                <i class="fa fa-sign-out"></i>
+                                <span class="dropdown-menu__caption ms-2">SignOut</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+        {% block toolbar %} {% endblock %}
+        <div class="body-wrapper">
+            <div class="bodywrapper__inner">
+                {% block content %} {% endblock %}
+            </div><!-- bodywrapper__inner end -->
+        </div><!-- body-wrapper end -->
+    </div>
+    <script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-toggle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/select2.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

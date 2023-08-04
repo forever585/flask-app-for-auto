@@ -22,7 +22,7 @@ compress = Compress()
 # Set up Flask-Login
 login_manager = LoginManager()
 login_manager.session_protection = 'basic'
-login_manager.login_view = 'account.login'
+login_manager.login_view = 'auth.signin'
 
 
 def create_app(config):
@@ -76,5 +76,8 @@ def create_app(config):
 
     from .admin import admin as admin_blueprint
     app.register_blueprint(admin_blueprint, url_prefix='/admin')
+
+    from .client import client as client_blueprint
+    app.register_blueprint(client_blueprint, url_prefix='/client')
 
     return app
