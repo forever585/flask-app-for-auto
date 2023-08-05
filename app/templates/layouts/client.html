@@ -16,8 +16,9 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}" />
         <link rel="stylesheet" href="{{ url_for('static', filename='css/select2.min.css') }}" />
         <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
         {% block style %} {% endblock %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}" />
         <link rel="icon" href="images/favicon.png" />
         <title>Enjoy Auto</title>
     </head>
@@ -36,7 +37,7 @@
                <div class="sidebar__menu-wrapper mt-3" id="sidebar__menuWrapper">
                    <ul class="sidebar__menu">
                        <li class="sidebar-menu-item">
-                           <a href="/client/dashboard" {% if data.active == 'dashboard' %} class=" nav-link active" {% else %} class=" nav-link" {% endif %}>
+                           <a href="/client/" {% if data.active == 'dashboard' %} class=" nav-link active" {% else %} class=" nav-link" {% endif %}>
                                <i class="fa fa-laptop font-size-24"></i>
                                <span class="menu-title font-size-24">Dashboard</span>
                            </a>
@@ -45,7 +46,7 @@
                        <li class="sidebar-menu-item">
                            <a href="/client/apply" {% if data.active == 'apply' %} class=" nav-link active" {% else %} class=" nav-link" {% endif %}>
                                <i class="fa fa-reply font-size-24"></i>
-                               <span class="menu-title font-size-24">Apply</span>
+                               <span class="menu-title font-size-24">Apply Jobs</span>
                            </a>
                        </li>
                    </ul>
@@ -65,7 +66,7 @@
                             <span class="navbar-user">
                                 <span class="navbar-user__thumb"><img src="{{ url_for('static', filename='img/avatar.jpg') }}" alt="image"></span>
                                 <span class="navbar-user__info">
-                                    <span class="navbar-user__name">User 1</span>
+                                    <span class="navbar-user__name">{{data.user.full_name()}}</span>
                                 </span>
                                 <span class="icon"><i class="fa fa-angle-down"></i></span>
                             </span>
@@ -86,18 +87,18 @@
             </div>
         </nav>
 
-
-        {% block toolbar %} {% endblock %}
         <div class="body-wrapper">
             <div class="bodywrapper__inner">
                 {% block content %} {% endblock %}
             </div><!-- bodywrapper__inner end -->
         </div><!-- body-wrapper end -->
     </div>
-    <script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/bootstrap-toggle.min.js') }}"></script>
+    <!-- <script src="{{ url_for('static', filename='js/bootstrap-toggle.min.js') }}"></script> -->
     <script src="{{ url_for('static', filename='js/select2.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    {% block script %} {% endblock %}
 </body>
 </html>

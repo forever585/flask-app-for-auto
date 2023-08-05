@@ -1,0 +1,60 @@
+.checkbox-container{
+    position: relative;
+    border: 1px solid hsl(var(--border));
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.checkbox-container-label{
+    position: absolute;
+    top: -15px;
+    padding: 0 5px;
+    background: white;
+}
+
+.position-add-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.position-add-button{
+    font-size: 1.2rem;
+    font-weight: 900;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+}
+
+.position-add-button i{
+    color: white!important;
+}
+
+.position-add-button:hover{
+    box-shadow: 2px 2px 10px 1px #4555d2;
+}
+
+.tag-container{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.tag{
+    padding: 4px 10px;
+    background: #5867d9;
+    color: white;
+    border-radius: 20px;
+}
+
+.tag-remove{
+    color: white;
+    margin-left: 6px;
+}
+
+.tag-remove:hover{
+    color: red;
+}

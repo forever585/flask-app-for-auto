@@ -8143,3 +8143,13 @@ i{
 .navbar-brand{
     margin: auto;
 }
+
+.flex-center{
+    display: flex;
+    align-items: center;
+}
+
+.flex-end{
+    display: flex;
+    align-items: end;
+}

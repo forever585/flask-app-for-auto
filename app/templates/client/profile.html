@@ -2,9 +2,350 @@
 {% block title %}Enjoy Auto | Dashboard{% endblock %}
 
 {% block style %} 
-<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}" />
 {% endblock %}
 
 {% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div>
+                <div class="card custom--card">
+                    <div class="card-header">
+                        <h5 class="card-title">Please fill thess fields to make auto bid.</h5>
+                    </div>
 
+                    <div class="card-body">
+                        <form method="POST" action="/client/profile">
+                            <div class="row">
+                                <!-- First Row -->
+                                <div class="col-md-5 mb-4">
+                                    <label class="form-label">LinkedIn Email *</label>
+                                    <input type="email" class="form-control form--control" id="linkedin_email" placeholder="Email" required/>
+                                </div>
+
+                                <div class="col-md-5 mb-4">
+                                    <label class="form-label">LinkdedIn Password *</label>
+                                    <input type="password" class="form-control form--control" id="linkedin_password" placeholder="Password" required/>
+                                </div>
+
+                                <div class="col-md-2 mb-4 flex-end">  
+                                    <div class="form-check form--check" title="Please check this if you want only apply for remote jobs!">
+                                        <input class="form-check-input custom--check" type="checkbox" id="only_remote" name="only_remote" />
+                                        <label class="form-check-label form-label" for="only_remote">Remote</label>
+                                    </div>
+                                </div>
+                                
+                                <!-- Second Row -->
+                                <div class="col-md-12 mb-4">
+                                    <div class="checkbox-container" title="Select level(s) of jobs you wish to apply.">
+                                        <span class="checkbox-container-label">Experience Level *</span>
+                                        <div class="row mx-0 my-3 px-2">
+                                            <div class="col-md-2 p-0 flex-end">  
+                                                <div class="form-check form--check" title="">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="job_level_internship" name="job_level_internship" checked/>
+                                                    <label class="form-check-label form-label m-0" for="job_level_internship">Internship</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2 p-0 flex-end" title="">  
+                                                <div class="form-check form--check">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="job_level_entry" name="job_level_entry" />
+                                                    <label class="form-check-label form-label m-0" for="job_level_entry">Entry</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2 p-0 flex-end" title="">  
+                                                <div class="form-check form--check">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="job_level_associate" name="job_level_associate" />
+                                                    <label class="form-check-label form-label m-0" for="job_level_associate">Associate</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2 p-0 flex-end" title="">  
+                                                <div class="form-check form--check">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="job_level_mid_senior" name="job_level_mid_senior" />
+                                                    <label class="form-check-label form-label m-0" for="job_level_mid_senior">Mid-Senior</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2 p-0 flex-end" title="">  
+                                                <div class="form-check form--check">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="job_level_executive" name="job_level_executive" />
+                                                    <label class="form-check-label form-label m-0" for="job_level_executive">Executive</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Job Types -->
+                                <div class="col-md-12 mb-3">
+                                    <div class="checkbox-container" title="Select the types of jobs you wish to apply.">
+                                        <span class="checkbox-container-label">Job Types *</span>
+                                        <div class="row mx-0 my-3 px-2">
+                                            <div class="col-md-2 p-0 flex-end">  
+                                                <div class="form-check form--check" title="">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="job_type_full_time" name="job_type_full_time" checked/>
+                                                    <label class="form-check-label form-label m-0" for="job_type_full_time">Full Time</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2 p-0 flex-end" title="">  
+                                                <div class="form-check form--check">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="job_type_contract" name="job_type_contract" />
+                                                    <label class="form-check-label form-label m-0" for="job_type_contract">Contract</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2 p-0 flex-end" title="">  
+                                                <div class="form-check form--check">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="job_type_part_time" name="job_type_part_time" />
+                                                    <label class="form-check-label form-label m-0" for="job_type_part_time">Part Time</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2 p-0 flex-end" title="">  
+                                                <div class="form-check form--check">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="job_type_temporary" name="job_type_temporary" />
+                                                    <label class="form-check-label form-label m-0" for="job_type_temporary">Temporary</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2 p-0 flex-end" title="">  
+                                                <div class="form-check form--check">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="job_type_other" name="job_type_other" />
+                                                    <label class="form-check-label form-label m-0" for="job_type_other">Other</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2 p-0 flex-end" title="">  
+                                                <div class="form-check form--check">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="job_type_volunteer" name="job_type_volunteer" />
+                                                    <label class="form-check-label form-label m-0" for="job_type_volunteer">Volunteer</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Time Range -->
+                                <div class="col-md-12 mb-3">
+                                    <div class="checkbox-container" title="Decide the time range since job was posted.">
+                                        <span class="checkbox-container-label">Time Range *</span>
+                                        <div class="row mx-0 my-3 px-2">
+                                            <div class="col-md-3 p-0 flex-end">  
+                                                <div class="form-check form--check" title="">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="time_range_all_time" name="time_range_all_time" checked/>
+                                                    <label class="form-check-label form-label m-0" for="time_range_all_time">All Time</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3 p-0 flex-end" title="">  
+                                                <div class="form-check form--check">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="time_range_month" name="time_range_month" />
+                                                    <label class="form-check-label form-label m-0" for="time_range_month">Month</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3 p-0 flex-end" title="">  
+                                                <div class="form-check form--check">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="time_range_week" name="time_range_week" />
+                                                    <label class="form-check-label form-label m-0" for="time_range_week">Week</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3 p-0 flex-end" title="">  
+                                                <div class="form-check form--check">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="time_range_day" name="time_range_day" />
+                                                    <label class="form-check-label form-label m-0" for="time_range_day">Day</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Positions -->
+                                <div class="col-md-12 mb-3">
+                                    <div class="checkbox-container" title="Add positions to search the job titles you are interested to apply for.">
+                                        <span class="checkbox-container-label">Positions</span>
+                                        <div id="positions_tag_container" class="tag-container mx-0 my-3 px-2">
+                                        </div>
+                                        <div class="mx-0 my-3 px-2 position-add-container">
+                                            <input id="positions_tag_input" type="text" class="form-control form--control" placeholder="Please input one position and click button"/>
+                                            <button 
+                                                class="btn btn-primary position-add-button" 
+                                                onclick="addTagToArray('positions')">
+                                                <i class="fa fa-plus m-0"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Sixth Row -->
+                                <div class="col-md-12 mb-3">
+                                    <div class="checkbox-container" title="Set the countries/places where you wish to work.">
+                                        <span class="checkbox-container-label">Location</span>
+                                        <div id="location_tag_container" class="tag-container mx-0 my-3 px-2">
+                                        </div>
+                                        <div class="mx-0 my-3 px-2 position-add-container">
+                                            <input id="location_tag_input" type="text" class="form-control form--control" placeholder="Please input one country or place and click button"/>
+                                            <button class="btn btn-primary position-add-button" onclick="addTagToArray('location')"><i class="fa fa-plus m-0"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Seven -->
+                                <div class="col-md-12 mb-4" title="Set Distance to determine the radius/distance from the place to search the job.">
+                                    <label class="form-label">Distance (miles)</label>
+                                    <div class="form--select">
+                                        <select id="distance" name="distance" class="form-select">
+                                            <option value="">0</option>
+                                            <option value="">5</option>
+                                            <option value="">10</option>
+                                            <option value="">25</option>
+                                            <option value="">50</option>
+                                            <option value="">100</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Eight -->
+                                <div class="col-md-6 mb-3">
+                                    <div class="checkbox-container" title="Set Company Blacklist to prevent bot from applying in specific companies.">
+                                        <span class="checkbox-container-label">Company Blacklist</span>
+                                        <div id="company_blacklist_tag_container" class="tag-container mx-0 my-3 px-2">
+                                        </div>
+                                        <div class="mx-0 my-3 px-2 position-add-container">
+                                            <input id="company_blacklist_tag_input" type="text" class="form-control form--control" placeholder="Please company name and click button"/>
+                                            <button class="btn btn-primary position-add-button" onclick="addTagToArray('company_blacklist')"><i class="fa fa-plus m-0"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <div class="checkbox-container" title="Set Title Blacklist to prevent bot from applying on jobs containing black listed words in titles.">
+                                        <span class="checkbox-container-label">Title Blacklist</span>
+                                        <div id="title_blacklist_tag_container" class="tag-container mx-0 my-3 px-2">
+                                        </div>
+                                        <div class="mx-0 my-3 px-2 position-add-container">
+                                            <input id="title_blacklist_tag_input"type="text" class="form-control form--control" placeholder="Please input one word and click button"/>
+                                            <button class="btn btn-primary position-add-button" onclick="addTagToArray('title_blacklist')"><i class="fa fa-plus m-0"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Resume -->
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Resume *</label>
+                                    <input id="resume_file" type="file" name="resume_file" class="form-control form--control px-2" accept=".pdf">
+                                </div>
+
+                                <div class="col-md-12 mb-4">
+                                    <label class="form-label">Cover Letter</label>
+                                    <input id="cover_letter" type="file" name="cover_letter" class="form-control form--control px-2" accept=".pdf">
+                                </div>
+                                <!-- Additional -->
+                                <div class="col-md-12 mb-3">
+                                    <div class="checkbox-container">
+                                        <span class="checkbox-container-label"  title="Update these fields to meet your specific needs as these would be used in all applications.">Additional Questions</span>
+                                        <div class="row mx-0 my-3 px-2">
+                                            <div class="col-md-4 mb-1 p-0 flex-end">  
+                                                <div class="form-check form--check" title="Do you have a valid driver's license?">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="additional_driver_license" name="additional_driver_license" />
+                                                    <label class="form-check-label form-label m-0" for="additional_driver_license">Driver License</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 mb-1 p-0 flex-end">  
+                                                <div class="form-check form--check" title="Will you now, or in the future, require sponsorship for employment visa status (e.g. H-1B visa status)?">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="additional_require_sponsorship" name="additional_require_sponsorship" />
+                                                    <label class="form-check-label form-label m-0" for="additional_require_sponsorship">Sponsorship Required</label>
+                                                </div>
+                                            </div>
+                                                <!-- visa required -->
+                                            <div class="col-md-4 mb-1 p-0 flex-end">  
+                                                <div class="form-check form--check" title="This is relative to the location and your citizenship applying above.">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="additional_require_visa" name="additional_require_visa" />
+                                                    <label class="form-check-label form-label m-0" for="additional_require_visa">Visa Required</label>
+                                                </div>
+                                            </div>
+                                                <!-- legally -->
+                                            <div class="col-md-4 mb-1 p-0 flex-end">  
+                                                <div class="form-check form--check" title="Are you legally authorized to work in COUNTRY?">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="additional_legally_authorized" name="additional_legally_authorized" />
+                                                    <label class="form-check-label form-label m-0" for="additional_legally_authorized">Legally Authorized</label>
+                                                </div>
+                                            </div>
+                                                <!-- urgent -->
+                                            <div class="col-md-4 mb-1 p-0 flex-end">  
+                                                <div class="form-check form--check" title="We must fill this position urgently. Can you start immediately?">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="additional_urgent_fill" name="additional_urgent_fill" />
+                                                    <label class="form-check-label form-label m-0" for="additional_urgent_fill" checked>Urgent Fill</label>
+                                                </div>
+                                            </div>
+                                                <!-- Commute -->
+                                            <div class="col-md-4 mb-1 p-0 flex-end">  
+                                                <div class="form-check form--check" title="Are you comfortable commuting to this job's location?">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="additional_commute_comfortable" name="additional_commute_comfortable" />
+                                                    <label class="form-check-label form-label m-0" for="additional_commute_comfortable">Commute</label>
+                                                </div>
+                                            </div>
+                                                <!-- Remote -->
+                                            <div class="col-md-4 mb-1 p-0 flex-end">  
+                                                <div class="form-check form--check" title="Are you comfortable working in a remote environment?">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="additional_remote_comfortable" name="additional_remote_comfortable" />
+                                                    <label class="form-check-label form-label m-0" for="additional_remote_comfortable">Remote</label>
+                                                </div>
+                                            </div>
+                                                <!-- drugTest -->
+                                            <div class="col-md-4 mb-1 p-0 flex-end">  
+                                                <div class="form-check form--check" title="Are you comfortable taking a drug in accordance with local/state laws?">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="additional_drug_test" name="additional_drug_test" />
+                                                    <label class="form-check-label form-label m-0" for="additional_drug_test">Drug Test</label>
+                                                </div>
+                                            </div>
+                                                <!-- assessment -->
+                                            <div class="col-md-4 mb-1 p-0 flex-end">  
+                                                <div class="form-check form--check" title="Are you willing to complete an assessment?">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="additional_assessment" name="additional_assessment" />
+                                                    <label class="form-check-label form-label m-0" for="additional_assessment">Assessment</label>
+                                                </div>
+                                            </div>
+                                                <!-- background check -->
+                                            <div class="col-md-4 mb-1 p-0 flex-end">  
+                                                <div class="form-check form--check" title="Are you willing to undergo a background check, in accordance with local law/regulations?">
+                                                    <input class="form-check-input custom--check" type="checkbox" id="additional_background_check" name="additional_background_check" />
+                                                    <label class="form-check-label form-label m-0" for="additional_background_check">Background Check</label>
+                                                </div>
+                                            </div>
+                                            <!-- degree -->
+                                            <div class="col-md-12 my-3">
+                                                <div class="checkbox-container" title="Have you completed the following level of education: DEGREE TYPE?">
+                                                    <span class="checkbox-container-label">Degrees</span>
+                                                    <div id="additional_degree_tag_container" class="tag-container mx-0 my-3 px-2">
+                                                        <span class="tag">High School Diploma<i class="fa fa-close tag-remove"></i></span>
+                                                        <span class="tag">Bachelor's Degree<i class="fa fa-close tag-remove"></i></span>
+                                                    </div>
+                                                    <div class="mx-0 my-3 px-2 position-add-container">
+                                                        <input id="additional_degree_tag_input" type="text" class="form-control form--control" placeholder="Please input one degree type and click button"/>
+                                                        <button class="btn btn-primary position-add-button" onclick="addTagToArray('additional_degree')"><i class="fa fa-plus m-0"></i></button> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button id="submit-button" type="submit" class="base-btn w-100">
+                                        SUBMIT
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %} 
+<script src="{{ url_for('static', filename='js/profile.js') }}"></script>
 {% endblock %}
