@@ -12,27 +12,24 @@
     background: white;
 }
 
-.position-add-container{
+.add-container{
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
 }
 
-.position-add-button{
+.add-button, .select-add-button{
     font-size: 1.2rem;
     font-weight: 900;
     border-radius: 50%;
     width: 42px;
     height: 42px;
     padding: 0;
-}
-
-.position-add-button i{
     color: white!important;
 }
 
-.position-add-button:hover{
+.add-button:hover, .select-add-button:hover{
     box-shadow: 2px 2px 10px 1px #4555d2;
 }
 
@@ -57,4 +54,11 @@
 
 .tag-remove:hover{
     color: red;
+}
+
+.select-container{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
 }

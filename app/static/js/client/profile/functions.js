@@ -1,0 +1,279 @@
+
+// language level array init when new language added
+function initLanguageLevels(element=undefined, index){
+    let value = element.value;
+    let key = data.languages.languageList[index];
+    data.languages.languageLevels.push({
+        key: key,
+        value: languageLevelChoice[value] 
+    })
+    console.log(data)
+}
+// experience years array init when new experience added
+function initExperienceYears(){
+    data.experience.map(item => {
+        data.experienceYears.push({
+            key: item,
+            value: 0
+        })
+    })
+}
+
+function initChildArray(parentKey, childKey, value){
+    data[parentKey].map(item => {
+        data[childKey].push({
+            key: item,
+            value: value
+        })
+    })
+}
+// Add new tag button listner
+function onAddButtonClick(e) {
+    let key = e.target.attributes.key.nodeValue;
+    let parent
+    try{
+        parent = e.target.attributes.parent.nodeValue;
+    }
+    catch(e){
+        parent = undefined;
+    }
+
+    let tag = $(`#${key}_tag_input`).val();
+    if(tag === '') {
+        // toastr.warning('Please fill input field and add tag!')
+        return
+    }
+    parent === undefined ? data[key].push(tag) : data[parent][key].push(tag);
+    showTagOnContainer(key, parent);
+    $(`#${key}_tag_input`).val('');
+}
+// display tags html on browser
+function showTagOnContainer(key, parent=undefined){
+    $(`#${key}_tag_container`).html(returnTagHtml(key, parent));
+}
+// init tags with tag data array
+function returnTagHtml(key, parent=undefined){
+    let html = '';
+    let array = parent === undefined ? data[key] : data[parent][key]
+    array.map((item, index) => {
+        html += parent === undefined ?`<span class="tag">${item}<i class="fa fa-close tag-remove" key="${key}" idx=${index} onclick="removeTag(this)"></i></span>` :
+        `<span class="tag">${item}<i class="fa fa-close tag-remove" parent="${parent}" key="${key}" idx=${index} onclick="removeTag(this)"></i></span>`;
+    })
+    return html;
+}
+//delete tag when user click remove icon
+function removeTag(element) {
+    let idx = parseInt(element.attributes.idx.nodeValue) ;
+    let key = element.attributes.key.nodeValue;
+    let newArray = [];
+    let parent
+    try{
+        parent = element.attributes.parent.nodeValue;
+    }
+    catch(e){
+        parent = undefined;
+    }
+    let array = parent === undefined ? data[key] : data[parent][key];
+    array.map((item, index) => {
+        if(index !== idx) newArray.push(item)
+    });
+    parent === undefined ? data[key] = newArray : data[parent][key] = newArray;
+    showTagOnContainer(key, parent);
+}
+//on Select add button clicked
+function onSelectAddButtonClicked(element){
+    let key = element.attributes.key.nodeValue;
+    let parent
+    try{
+        parent = element.attributes.parent.nodeValue;
+    }
+    catch(e){
+        parent = undefined;
+    }
+
+    let select = $(`#${key}_input`).val();
+    if(select === '') {
+        // toastr.warning('Please fill input field and click button!')
+        return
+    }
+    let array = parent === undefined ? data[key] : data[parent][key];
+    if (array.find((item) => {return select === item}) === undefined)
+                array.push(select);
+        else {
+            // toastr.warning('You already input this one')
+            return
+    }
+    parent === undefined ? data[key] = array : data[parent][key] = array;
+    showSelectOnContainer(key, parent);
+    $(`#${key}_input`).val('');
+}
+
+function addExperience(element){
+    data[expe]
+}
+
+function showSelectOnContainer(key, parent=undefined){
+    $(`#${key}_select_container`).html(returnSelectHtml(key, parent));
+}
+
+function returnSelectHtml(key, parent=undefined){
+    let html = '';
+    let array = parent === undefined ? data[key] : data[parent][key]
+    array.map((item, index) => {
+        html += `<div class="w-50 mb-4 mx-0" title="">
+                    <label class="form-label">${item}</label>
+                    <div class="form--select">
+                        <select parent="english_level" key="english_level" class="form-select" parent="languages" key="langu" onchange="initLanguageLevels(this, ${index})">
+                            <option selected value="0">None</option>
+                            <option value="1">Conversational</option>
+                            <option value="2">Professional</option>
+                            <option value="3">Native or bilingual</option>
+                        </select>
+                    </div>
+                </div>`
+    })
+    return html;
+}
+
+function addExperienceClick(element, type){
+    if(type === 'custom'){
+        let customExperience = $('#custom_experience_input').val()
+        if($('#custom_experience_input').val() === ''){
+            // toastr
+            // toastr.warning('Please fill this field')
+            return
+        }
+        if (data.experience.experienceList.find((item) => {customExperience === item}) === undefined)
+                data.experience.experienceList.push();
+        else {
+            // toastr.warning('You already input this one')
+            return
+        }
+    }
+    let experience = type === 'normal' ?
+        data.experience.experienceList[element.value] : 
+        $('#custom_experience_input').val();
+    let newExperienceList = []
+    data.experience.experienceList.map((item, index) =>{
+        if (item !== experience) newExperienceList.push(item)
+    })
+    data.experience.experienceList = newExperienceList;
+    data.experience.experienceYears.push({
+        key: experience,
+        value: 0
+    });
+    html = returnExperienceYearInputHtml();
+    $('#experienceList_container').html(html);
+    updateNormalExperienceList()
+}
+
+function returnExperienceYearInputHtml(){
+    let html = '';
+    data.experience.experienceYears.map((item, index) => {
+        html += `<div class="col-md-4 mb-3">
+                    <label class="form-label" id="">${item.key}</label>
+                    <input 
+                        type="number" 
+                        class="form-control form--control experience-input" 
+                        key="${item.key}" 
+                        value_type="int" 
+                        index="${index}"
+                        placeholder="${item.key}"
+                        value_type="int"
+                        onblur="updateExperience(this)"/>
+                </div>`
+        
+    })
+    return html;
+}
+
+function updateNormalExperienceList(){
+    let html = '';
+    data.experience.experienceList.map((item, key) => {
+        html += `<option value="${key}">${item}</option>`
+    })
+    $('#experience_normal_list').html(html)
+}
+
+function updateExperience(element){
+    console.log(element)
+    if(parseValue(element)) return;
+    data.experience.experienceYears[element.attributes.index.nodeValue] = {
+        key: element.attributes.key.nodeValue,
+        value: element.value
+    }
+    console.log(data)
+}
+
+// on file load listener
+function onFileLoad(element){
+    let key = element.attributes.key.nodeValue;
+    let parent;
+    try{
+        parent = element.attributes.parent.nodeValue;
+    }
+    catch(e){
+        parent = undefined;
+    }
+    parent === undefined ? data[key] = element.files : data[parent][key] = element.files;
+}
+//select change listener
+function onSelectChange(element){
+    let key = element.attributes.key.nodeValue;
+    data[key] = element.selectedOptions[0].value
+}
+
+// Parse Inputed Value is Valid Type
+function parseValue(element){
+    let valueType
+    try{
+        valueType = element.attributes.value_type.nodeValue;
+    }
+    catch(e){
+        return true
+    }
+    let parseResult;
+    switch(valueType){
+        case 'int':
+            parseResult = parseInt(element.value)
+            break;
+        case 'float':
+            parseResult = parseFloat(element.value)
+            break;
+        default :
+            parseResult = True;
+            break
+    }
+    if(isNaN(parseResult)) {
+        // toastr.warning(`Please input valid value for <b style="color:black;">${element.placeholder}</b> Field !`);
+        element.value = ""
+        return false
+    }
+}
+
+//input change listener
+function onInputChange(element){
+    if (!parseValue(element)) return;
+    let key = element.attributes.key.nodeValue;
+    let parent;
+    try{
+        parent = element.attributes.parent.nodeValue;
+    }
+    catch(e){
+        parent = undefined;
+    }
+    parent === undefined ? data[key] = element.value : data[parent][key] = element.value;
+}
+//checkbox change listener
+function onToggle(element){
+    let key = element.attributes.key.nodeValue;
+    let parent;
+    try{
+        parent = element.attributes.parent.nodeValue;
+    }
+    catch(e){
+        parent = undefined;
+    }
+    let status = element.checked ? 1 : 0;
+    parent === undefined ? data[key] = status : data[parent][key] = status;
+}
