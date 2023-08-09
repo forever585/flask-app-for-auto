@@ -6,6 +6,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {% block meta %}{% endblock %}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
@@ -39,6 +40,13 @@
                                <span class="menu-title font-size-24">Dashboard</span>
                            </a>
                        </li>
+
+                       <li class="sidebar-menu-item">
+                            <a href="/client/membership" {% if data.active == 'apply' %} class=" nav-link active" {% else %} class=" nav-link" {% endif %}>
+                                <i class="fa fa-credit-card font-size-24"></i>
+                                <span class="menu-title font-size-24">Packages</span>
+                            </a>
+                        </li>
         
                        <li class="sidebar-menu-item">
                            <a href="/client/apply" {% if data.active == 'apply' %} class=" nav-link active" {% else %} class=" nav-link" {% endif %}>

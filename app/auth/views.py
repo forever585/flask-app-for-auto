@@ -291,5 +291,5 @@ def before_request():
 def unconfirmed():
     """Catch users with unconfirmed emails."""
     if current_user.is_anonymous or current_user.confirmed:
-        return redirect(url_for('client.index'))
+        return redirect(url_for('client.views.index'))
     return render_template('auth/unconfirmed.html')

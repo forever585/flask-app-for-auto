@@ -1,11 +1,16 @@
 {% extends 'layouts/client.html' %}
 {% block title %}Enjoy Auto | Dashboard{% endblock %}
 
+{% block meta %}
+    <meta id="form_data" data-form-data="{{data.form_data}}" data-other="{{other}}">
+{% endblock %}
+
 {% block style %} 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}" />
 {% endblock %}
 
 {% block content %}
+    <div id="form_data"></div>
     <div class="container">
         <div class="row justify-content-center">
             <div>
@@ -15,7 +20,10 @@
                     </div>
 
                     <div class="card-body">
-                        <div method="POST" action="/client/profile">
+                        <div class="form">
+                            <input type="hidden" id="upload_url" value="{{ data.upload }}"/>
+                            <input type="hidden" id="form_submit_url" value="{{ data.url }}"/>
+                            <input type="hidden" id="csrf_token" name="csrf_token" value = "{{ csrf_token() }}" /> 
                             <div id="profile_container" class="row">
                                 
                             </div>
@@ -25,7 +33,10 @@
             </div>
         </div>
     </div>
+
+
 {% endblock %}
+
 
 {% block script %} 
 <script src="{{ url_for('static', filename='js/client/profile/data.js') }}"></script>

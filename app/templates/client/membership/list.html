@@ -1,0 +1,27 @@
+{% extends 'layouts/client.html' %}
+{% block title %}Enjoy Auto | Profiles{% endblock %}
+
+{% block meta %}
+    <meta id="form_data" data-form-data="{{data.form_data}}" data-other="{{other}}">
+{% endblock %}
+
+{% block style %} 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}" />
+{% endblock %}
+
+{% block content %}
+    <div id="form_data"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="card custom--card">
+                
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+{% block script %} 
+{% endblock %}

@@ -5,12 +5,18 @@ from itsdangerous import BadSignature, SignatureExpired
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from .. import db, login_manager
+from .profile import Profile
 
 
 class Permission:
     GENERAL = 0x01
     ADMINISTER = 0xff
 
+class Membership:
+    NO_MEMBERSHIP = 0
+    BASIC = 1
+    PROFESSIONAL = 2
+    PREMIUM = 3
 
 class Role(db.Model):
     __tablename__ = 'roles'
@@ -54,6 +60,8 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(64), unique=True, index=True)
     password_hash = db.Column(db.String(128))
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
+    membership = db.Column(db.Integer, default=Membership.NO_MEMBERSHIP)
+    profiles = db.relationship('Profile', backref='role', lazy='dynamic')
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)

@@ -2,6 +2,10 @@
 
 function initHtml(){
     let profileHtml = `
+    <div class="col-md-12 mb-4">
+        <label class="form-label">Title *</label>
+        <input type="text" class="form-control form--control" key="title" placeholder="Profile Title" value="${data.title}" onblur="onInputChange(this)" required/>
+    </div>
     <!-- Email Password -->
     <div class="col-md-5 mb-4">
         <label class="form-label">LinkedIn Email *</label>
@@ -224,12 +228,12 @@ function initHtml(){
     <!-- Resume -->
     <div class="col-md-12 mb-3">
         <label class="form-label">Resume *</label>
-        <input parent="uploads" key="resume" type="file" name="" class="form-control form--control px-2" accept=".pdf" onchange="onFileLoad(this)">
+        <input id="resume_file_input" type="file" name="" class="form-control form--control px-2" accept=".pdf" />
     </div>
     <!-- Coverletter -->
     <div class="col-md-12 mb-4">
         <label class="form-label">Cover Letter</label>
-        <input parent="uploads" key="coverLetters" id="cover_letter" type="file" name="cover_letter" class="form-control form--control px-2" accept=".pdf" onchange="onFileLoad(this)">
+        <input id="cover_letter_file_input" type="file" class="form-control form--control px-2" accept=".pdf" />
     </div>
     <!-- Additional checkboxes-->
     <div class="col-md-12 mb-3">
@@ -479,7 +483,7 @@ function initHtml(){
     </div>
 
     <div class="col-md-12">
-        <button id="submit-button" type="submit" class="base-btn w-100">
+        <button id="submit-button" type="submit" class="base-btn w-100" onclick="onSubmit()">
             SUBMIT
         </button>
     </div>

@@ -53,6 +53,9 @@ class Config:
 
     RAYGUN_APIKEY = os.environ.get('RAYGUN_APIKEY')
 
+    # Upload
+    UPLOAD_FOLDER = os.environ.get('UPLOAD_FOLDER','resources/upload/')
+
     # Parse the REDIS_URL to set RQ config variables
     if PYTHON_VERSION == 3:
         urllib.parse.uses_netloc.append('redis')

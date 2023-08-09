@@ -34,6 +34,7 @@ def create_app(config):
 
     app.config.from_object(Config[config_name])
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['UPLOAD_FOLDER'] = os.getenv('UPLOAD_FOLDER', 'default')
     # not using sqlalchemy event system, hence disabling it
 
     Config[config_name].init_app(app)

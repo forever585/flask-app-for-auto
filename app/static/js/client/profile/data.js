@@ -1,6 +1,7 @@
 let data = {
-    email: 'tgila2505@gmail.com',
-    password: 'Stag.2505',
+    title:'',
+    email: '',
+    password: '',
     remote: 1,
     experienceLevel: {
         'internship': 0,
@@ -37,12 +38,12 @@ let data = {
         'Royal Bank of Canada'
     ],
     titleBlacklist: [
-        'Construction'
+        ''
     ],
-    posterBlacklist: [],
+    posterBlacklist: [''],
     uploads: {
-        resume: null,
-        coverLetter: null
+        resume: '',
+        coverLetter: ''
     },
     checkboxes: {
         driversLicence: 1,
@@ -127,16 +128,16 @@ let data = {
         experienceYears: [],
     },
     personalInfo: {
-        'First Name': 'Tanzeel',
-        'Last Name': 'Gilani',
-        'Phone Country Code': 'Canada (+1)',
-        'Mobile Phone Number': '2892334999',
-        'Street Address': '9 Rolling Rock Way',
-        'City': 'Brampton, Ontario',
-        'State': 'ON',
-        'Zip': 'L6Y6H3',
-        'Linkedin': 'https://www.linkedin.com/in/syed-tanzeel-gilani',
-        'Website': 'https://www.my-website.com'
+        'First Name': '',
+        'Last Name': '',
+        'Phone Country Code': '',
+        'Mobile Phone Number': '',
+        'Street Address': '',
+        'City': '',
+        'State': '',
+        'Zip': '',
+        'Linkedin': '',
+        'Website': ''
     },
     eeo: {
         gender: 'None',
@@ -154,3 +155,6 @@ let languageLevelChoice = [
     'Professional',
     'Native or bilingual'
 ]
+
+// var ddddd = $('#form_data').data()
+// console.log(ddddd)

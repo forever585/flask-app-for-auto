@@ -2,7 +2,12 @@ from flask import url_for
 from wtforms.fields import Field
 from wtforms.widgets import HiddenInput
 from wtforms.compat import text_type
+import random, string, os
+from flask_login import current_user
+from flask import make_response, jsonify
 
+import app
+from config import Config
 
 def register_template_utils(app):
     """Register Jinja 2 helpers (called from __init__.py)."""
@@ -42,3 +47,28 @@ class CustomSelectField(Field):
             self.raw_data = [valuelist[1]]
         else:
             self.data = ''
+
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+def file_upload(file):
+    print(file)
+    if file and allowed_file(file.filename):
+        filename = file.filename
+        path = Config.UPLOAD_FOLDER + f'{current_user.id}'
+        if not os.path.exists(path):
+            os.makedirs(path)
+        file.save(os.path.join(path + '/', filename))
+        return filename
+
+def change_to_boolean(value):
+    if value == 1:
+        return True
+    else:
+        return False
+
+def random_string(length):
+   letters = string.ascii_lowercase
+   return ''.join(random.choice(letters) for i in range(length))

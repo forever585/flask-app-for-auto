@@ -3,11 +3,15 @@
 function initLanguageLevels(element=undefined, index){
     let value = element.value;
     let key = data.languages.languageList[index];
-    data.languages.languageLevels.push({
-        key: key,
-        value: languageLevelChoice[value] 
-    })
-    console.log(data)
+    let newItem = {
+            key: key,
+            value: languageLevelChoice[value]
+        }
+    let dupIndex = data.languages.languageLevels.findIndex((item) => { return item.key === key })
+    if (dupIndex === -1)
+        data.languages.languageLevels.push(newItem)
+    else data.languages.languageLevels[dupIndex] =  newItem
+    
 }
 // experience years array init when new experience added
 function initExperienceYears(){
@@ -40,7 +44,7 @@ function onAddButtonClick(e) {
 
     let tag = $(`#${key}_tag_input`).val();
     if(tag === '') {
-        // toastr.warning('Please fill input field and add tag!')
+        toastr.warning('Please fill input field and add tag!')
         return
     }
     parent === undefined ? data[key].push(tag) : data[parent][key].push(tag);
@@ -93,14 +97,14 @@ function onSelectAddButtonClicked(element){
 
     let select = $(`#${key}_input`).val();
     if(select === '') {
-        // toastr.warning('Please fill input field and click button!')
+        toastr.warning('Please fill input field and click button!')
         return
     }
     let array = parent === undefined ? data[key] : data[parent][key];
     if (array.find((item) => {return select === item}) === undefined)
                 array.push(select);
         else {
-            // toastr.warning('You already input this one')
+            toastr.warning('You already input this one')
             return
     }
     parent === undefined ? data[key] = array : data[parent][key] = array;
@@ -124,10 +128,10 @@ function returnSelectHtml(key, parent=undefined){
                     <label class="form-label">${item}</label>
                     <div class="form--select">
                         <select parent="english_level" key="english_level" class="form-select" parent="languages" key="langu" onchange="initLanguageLevels(this, ${index})">
-                            <option selected value="0">None</option>
-                            <option value="1">Conversational</option>
-                            <option value="2">Professional</option>
-                            <option value="3">Native or bilingual</option>
+                            <option ${data.languages.languageLevels[item] === languageLevelChoice[0] ? 'selected' : ''} value="0">None</option>
+                            <option ${data.languages.languageLevels[item] === languageLevelChoice[1] ? 'selected' : ''} value="1">Conversational</option>
+                            <option ${data.languages.languageLevels[item] === languageLevelChoice[2] ? 'selected' : ''} value="2">Professional</option>
+                            <option ${data.languages.languageLevels[item] === languageLevelChoice[3] ? 'selected' : ''} value="3">Native or bilingual</option>
                         </select>
                     </div>
                 </div>`
@@ -139,14 +143,13 @@ function addExperienceClick(element, type){
     if(type === 'custom'){
         let customExperience = $('#custom_experience_input').val()
         if($('#custom_experience_input').val() === ''){
-            // toastr
-            // toastr.warning('Please fill this field')
+            toastr.warning('Please fill this field')
             return
         }
         if (data.experience.experienceList.find((item) => {customExperience === item}) === undefined)
                 data.experience.experienceList.push();
         else {
-            // toastr.warning('You already input this one')
+            toastr.warning('You already input this one')
             return
         }
     }
@@ -196,13 +199,11 @@ function updateNormalExperienceList(){
 }
 
 function updateExperience(element){
-    console.log(element)
     if(parseValue(element)) return;
     data.experience.experienceYears[element.attributes.index.nodeValue] = {
         key: element.attributes.key.nodeValue,
         value: element.value
     }
-    console.log(data)
 }
 
 // on file load listener
@@ -216,6 +217,7 @@ function onFileLoad(element){
         parent = undefined;
     }
     parent === undefined ? data[key] = element.files : data[parent][key] = element.files;
+    console.log(data)
 }
 //select change listener
 function onSelectChange(element){
@@ -245,7 +247,7 @@ function parseValue(element){
             break
     }
     if(isNaN(parseResult)) {
-        // toastr.warning(`Please input valid value for <b style="color:black;">${element.placeholder}</b> Field !`);
+        toastr.warning(`Please input valid value for <b style="color:black;">${element.placeholder}</b> Field !`);
         element.value = ""
         return false
     }
@@ -276,4 +278,71 @@ function onToggle(element){
     }
     let status = element.checked ? 1 : 0;
     parent === undefined ? data[key] = status : data[parent][key] = status;
+}
+
+function onSubmit(){
+    // data['csrf_token'] = $('#csrf_token').val();
+    // console.log(data)
+    uploadResume()
+}
+
+function uploadResume(){
+    let formData = new FormData();
+    console.log($('#resume_file_input'))
+    let resume = $('#resume_file_input')[0].files[0] /* === null ? {} : data['uploads']['resume'][0] */
+    let coverLetter = $('#cover_letter_file_input')[0].files[0] /* === null ? {} : data['uploads']['coverLetter'][0] */
+
+    formData.append('resume', resume);
+    formData.append('coverLetter', coverLetter);
+
+    $.ajax({
+        url: $('#upload_url').val(),
+        method: 'post',
+        data: formData,
+        contentType : false,
+        processData : false,
+        headers: {
+            "X-CSRFToken": $('#csrf_token').val(),
+        },
+        success: function(res, textStatus, xhr) {
+            console.log(res)
+            let resumeFilename = res.resume;
+            let coverLetterFileName = res.coverLetter;
+            data['uploads']['resume'] = resumeFilename;
+            data['uploads']['coverLetter'] = coverLetterFileName;
+            postProfile();
+        },
+        complete: function(xhr, textStatus) {
+            switch(xhr.status){
+                case 400:
+                    toastr.error(xhr.responseJSON.message)
+            }
+        } 
+    });
+}
+
+function postProfile(){
+    if(data['uploads']['resume'] === '') toastr.warning('Please select your resume file!')
+    sendData = JSON.stringify(data)
+    $.ajaxSetup({
+        contentType: "application/json; charset=utf-8"
+      });
+      
+    $.ajax({
+        type: 'POST',
+        url: $('#form_submit_url').val(),
+        headers: {
+            "X-CSRFToken": $('#csrf_token').val(),
+        },
+        data: sendData, 
+        success: function(res, textStatus, xhr) {
+            toastr.success(res.message)
+        },
+        complete: function(xhr, textStatus) {
+            switch(xhr.status){
+                case 400:
+                    toastr.error(xhr.responseJSON.message)
+            }
+        } 
+    })
 }
