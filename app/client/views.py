@@ -20,8 +20,6 @@ from ..models import Profile
 from ..utils import file_upload, change_to_boolean
 from .. import db
 
-from flask import Blueprint
-
 client = Blueprint('client', __name__)
 
 @client.route('/', methods=['GET'])

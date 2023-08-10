@@ -81,4 +81,7 @@ def create_app(config):
     from .client import client as client_blueprint
     app.register_blueprint(client_blueprint, url_prefix='/client')
 
+    from .client.membership import membership as membership_blueprint
+    app.register_blueprint(membership_blueprint, url_prefix='/membership')
+
     return app

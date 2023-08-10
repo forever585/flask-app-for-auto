@@ -6,17 +6,104 @@
 {% endblock %}
 
 {% block style %} 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/membership.css') }}" />
 {% endblock %}
 
 {% block content %}
     <div id="form_data"></div>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="card custom--card">
-                
-            </div>
-        </div>
+        <!-- <div class="row justify-content-center"> -->
+            <!-- <div class="card custom--card"> -->
+                <div class="row mt-5">
+                    <div class="col-md-4">
+                        <div class="card custom--card rounded-4 mb-5 card-normal">
+                            <div class="card-body">
+                                <div>
+                                    <h4 class="fw-bold">Basic</h4>
+                                    <p class="text-muted">This is only for fans to enjoy auto bid on LinkedIn.</p>
+                                </div>
+                                <h2 class="fs-1 fw-bold mt-4 mb-5">$10</h2>
+                                <ul class="list-group list-group-flush mb-5">
+                                    <li class="list-group-item border-0 fs-5 list-normal">
+                                        <i class="fa fa-check me-1"></i>1 Job Role
+                                    </li>
+                                    <li class="list-group-item border-0 fs-5 list-normal">
+                                        <i class="fa fa-check me-1"></i>100 Jobs
+                                    </li>
+                                    <li class="list-group-item border-0 fs-5 list-normal">
+                                        <i class="fa fa-check me-1"></i>3 Jobs per Day
+                                    </li>
+                                    <li class="list-group-item border-0 fs-5 list-normal">
+                                        <i class="fa fa-check me-1"></i>1 Month Supply
+                                    </li>
+                                </ul>
+                                <div class="d-grid">
+                                    <button class="btn btn-primary rounded-4 mt-1 mb-1"><i class="fa fa-thumbs-up" style="color: white;"></i> PURCHASE</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card custom--card rounded-4 mb-5 card-popular">
+                            <div class="card-body">
+                                <div>
+                                    <h4 class="fw-bold">Professional</h4>
+                                    <p class="text-muted">This is the most popular one for you.</p>
+                                </div>
+                                <h2 class="fs-1 fw-bold mt-4 mb-5">$14.99</h2>
+                                <ul class="list-group list-group-flush mb-5">
+                                    <li class="list-group-item border-0 fs-5 list-item-popular">
+                                        <i class="fa fa-check me-1"></i>3 Job Role
+                                    </li>
+                                    <li class="list-group-item border-0 fs-5 list-item-popular">
+                                        <i class="fa fa-check me-1"></i>300 Jobs
+                                    </li>
+                                    <li class="list-group-item border-0 fs-5 list-item-popular">
+                                        <i class="fa fa-check me-1"></i>10 Jobs per Day
+                                    </li>
+                                    <li class="list-group-item border-0 fs-5 list-item-popular">
+                                        <i class="fa fa-check me-1"></i>1 Month Supply
+                                    </li>
+                                </ul>
+                                <div class="d-grid">
+                                    <button class="btn btn-primary rounded-4 mt-1 mb-1"><i class="fa fa-thumbs-up" style="color: white;"></i> PURCHASE</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card custom--card rounded-4 mb-5 card-normal">
+                            <div class="card-body">
+                                <div>
+                                    <h4 class="fw-bold">Premium</h4>
+                                    <p class="text-muted">This is the best one who wants to get job.</p>
+                                </div>
+                                <h2 class="fs-1 fw-bold mt-4 mb-5">$19.99</h2>
+                                <ul class="list-group list-group-flush mb-5">
+                                    <li class="list-group-item border-0 fs-5 list-normal">
+                                        <i class="fa fa-check me-1"></i>5 Job Role
+                                    </li>
+                                    <li class="list-group-item border-0 fs-5 list-normal">
+                                        <i class="fa fa-check me-1"></i>600 Jobs
+                                    </li>
+                                    <li class="list-group-item border-0 fs-5 list-normal">
+                                        <i class="fa fa-check me-1"></i>20 Jobs per Day
+                                    </li>
+                                    <li class="list-group-item border-0 fs-5 list-normal">
+                                        <i class="fa fa-check me-1"></i>1 Month Supply
+                                    </li>
+                                </ul>
+                                <div class="d-grid">
+                                    <button class="btn btn-primary rounded-4 mt-1 mb-1"><i class="fa fa-thumbs-up" style="color: white;"></i> PURCHASE</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- </div> -->
+        <!-- </div> -->
     </div>
 
 

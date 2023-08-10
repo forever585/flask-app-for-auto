@@ -1,0 +1,17 @@
+.card-popular{
+    background: #fde669;
+    box-shadow: 2px 2px 2px 5px #e1d48d;
+}
+
+.list-item-popular{
+    background: #fde669;
+}
+
+.card-normal{
+    background: aliceblue;
+    box-shadow: 1px 1px 1px 3px #dfeaf4;
+}
+
+.list-normal{
+    background: aliceblue;
+}
